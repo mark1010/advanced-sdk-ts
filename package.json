@@ -1,32 +1,33 @@
 {
-  "name": "@coinbase-samples/advanced-sdk-ts",
-  "version": "0.1.0",
+  "name": "@coinbase-sample/advanced-trade-sdk-ts",
+  "version": "0.2.1",
   "main": "dist/rest/index.js",
   "types": "./dist/types/rest/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "lint": "eslint . --ext .js,.ts",
-    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"**/*.{js,ts,tsx,json,css,md}\"",
+    "gen-types": "openapi-generator-cli generate -i apiSpec/retail-public-api-spec.json -g typescript-node --global-property models -o apiSpec/types --additional-properties=supportsES6=true --additional-properties=snapshot=true && cd apiSpec && node generateTypes.js",
+    "replace-model": "rm -r src/model && cp -r apiSpec/types/processed src/model"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "hacked to basic working state",
   "devDependencies": {
-    "@types/node-fetch": "^2.6.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.0",
-    "@typescript-eslint/parser": "^5.59.0",
-    "dotenv": "^16.4.5",
-    "eslint": "^8.35.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "prettier": "^2.8.8",
-    "typescript": "^5.5.4"
+    "@coinbase-sample/core-ts": "^0.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "dotenv": "^16.5.0",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@types/jsonwebtoken": "^9.0.6",
-    "jsonwebtoken": "^9.0.2",
-    "node-fetch": "^2.6.1"
+    "@types/jsonwebtoken": "^9.0.9",
+    "jsonwebtoken": "^9.0.2"
   }
 }

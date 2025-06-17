@@ -11,7 +11,7 @@ For more information on all the available REST endpoints, see the [API Reference
 ## Installation
 
 ```bash
-npm install
+npm install @coinbase-sample/advanced-trade-sdk-ts
 ```
 
 ---
@@ -74,7 +74,7 @@ Make sure to save your API key and secret in a safe place. You will not be able 
 All the REST endpoints are available directly from the client, therefore it's all you need to import.
 
 ```
-import { RESTClient } from './rest';
+import { CoinbaseAdvTradeClient } from '@coinbase-samples/advanced-trade-sdk-ts';
 ```
 
 ---
@@ -86,7 +86,12 @@ Authentication of CDP API Keys is handled automatically by the SDK when making a
 After creating your CDP API keys, store them using your desired method and simply pass them into the client during initialization like:
 
 ```
-const client = new RESTClient(API_KEY, API_SECRET);
+const credentials = new CoinbaseAdvTradeCredentials(
+  process.env.KEY_NAME,
+  process.env.PRIVATE_KEY
+);
+
+const client = new CoinbaseAdvTradeClient(credentials);
 ```
 
 ---
@@ -98,7 +103,8 @@ Here are a few examples requests:
 **[List Accounts](https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccounts)**
 
 ```
-client
+const accountService = new AccountsService(client);
+accountService
     .listAccounts({})
     .then((result) => {
         console.log(result);
@@ -111,7 +117,8 @@ client
 **[Get Product](https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getproduct)**
 
 ```
-client
+productService = new ProductsService(client);
+productService
     .getProduct({productId: "BTC-USD"})
     .then((result) => {
         console.log(result);
@@ -126,14 +133,15 @@ client
 _$10 Market Buy on BTC-USD_
 
 ```
-client
+const orderService = new OrdersService(client);
+orderService
     .createOrder({
         clientOrderId: "00000001",
         productId: "BTC-USD",
         side: OrderSide.BUY,
         orderConfiguration:{
-            market_market_ioc: {
-                quote_size: "10"
+            marketMarketIoc: {
+                quoteSize: "10"
             }
         }
     })
