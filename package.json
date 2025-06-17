@@ -12,6 +12,7 @@
     "replace-model": "rm -r src/model && cp -r apiSpec/types/processed src/model"
   },
   "files": [
+    "tsconfig.json",
     "src/",
     "dist/"
   ],
