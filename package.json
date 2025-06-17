@@ -9,9 +9,6 @@
     "lint": "eslint . --ext .js,.ts",
     "format": "prettier --write \"**/*.{js,ts,tsx,json,css,md}\""
   },
-  "files": [
-    "dist/"
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
