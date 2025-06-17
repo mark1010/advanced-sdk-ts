@@ -1,6 +1,8 @@
 {
   "name": "@coinbase-sample/advanced-trade-sdk-ts",
   "version": "0.2.1",
+  "main": "dist/rest/index.js",
+  "types": "./dist/types/rest/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf dist && tsc",
@@ -15,7 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "package_1 include main and types",
   "devDependencies": {
     "@coinbase-sample/core-ts": "^0.1.1",
     "@typescript-eslint/eslint-plugin": "^8.29.1",
